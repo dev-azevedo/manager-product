@@ -32,3 +32,17 @@ def test_list_categories(categories_on_db):
         "id": categories_on_db[0].id
     }
     
+def test_delete_category(db_session):
+    category_model = CategoryModel(
+        name="Roupa",
+        slug="roupa"
+    )
+    db_session.add(category_model)
+    db_session.commit()
+    
+    response = client.delete(f"/categories/delete/{category_model.id}")
+    
+    assert response.status_code == status.HTTP_200_OK
+    
+    category_model = db_session.query(CategoryModel).first()
+    assert category_model is None
