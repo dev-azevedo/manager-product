@@ -17,8 +17,8 @@ def test_add_category_uc(db_session):
     category_on_db = db_session.query(CategoryModel).all()
     
     assert len(category_on_db) == 1
-    assert category_on_db[0].name == category_on_db.name
-    assert category_on_db[0].slug == category_on_db.slug
+    assert category_on_db[0].name == category.name
+    assert category_on_db[0].slug == category.slug
     
     db_session.delete(category_on_db[0])
     db_session.commit()
@@ -42,9 +42,9 @@ def test_delete_category_uc(db_session):
     db_session.add(category_model)
     db_session.commit()
     
-    uc = CategoryUseCases(db_session)
+    uc = CategoryUseCases(db_session=db_session)
     
-    uc.delete_category(category_model.id)    
+    uc.delete_category(id=category_model.id)    
     
     category_model = db_session.query(CategoryModel).first()
     assert category_model is None
