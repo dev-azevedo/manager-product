@@ -19,3 +19,8 @@ class Product(CustomBaseModel):
         if value <= 0:
             raise ValueError('Invalid price')
         return value
+    
+    
+class ProductInput(CustomBaseModel):
+    category_slug: str
+    product: Product
