@@ -23,7 +23,7 @@ def test_add_category_uc(db_session):
     db_session.delete(category_on_db[0])
     db_session.commit()
     
-def test_list_categories(db_session, categories_on_db):
+def test_list_categories_uc(db_session, categories_on_db):
     uc = CategoryUseCases(db_session)
     
     categories = uc.list_categories()
@@ -48,8 +48,7 @@ def test_delete_category_uc(db_session):
     
     category_model = db_session.query(CategoryModel).first()
     assert category_model is None
-    
-    
+   
 def test_delete_category_non_exist(db_session):    
     uc = CategoryUseCases(db_session)
     
