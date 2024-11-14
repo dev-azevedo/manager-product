@@ -26,5 +26,10 @@ def delete_product(id: int, db_session: Session = Depends(get_db_session)):
     uc.delete_product(id)  
     
     return Response(status_code=status.HTTP_200_OK)
-    
+
+@router.get("/list")
+def list_products(db_session: Session = Depends(get_db_session)):
+    uc = ProductUseCases(db_session)
+    products = uc.list_products()
+    return products
     
